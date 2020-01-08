@@ -6,11 +6,11 @@ FROM alpine
 LABEL maintainer="kev <noreply@datageek.info>, Sah <contact@leesah.name>"
 
 ENV SERVER_ADDR 0.0.0.0
-ENV SERVER_PORT 8388
+ENV SERVER_PORT 1080
 ENV PASSWORD=
-ENV METHOD      aes-256-gcm
+ENV METHOD      aes-128-gcm
 ENV TIMEOUT     300
-ENV DNS_ADDRS    8.8.8.8,8.8.4.4
+ENV DNS_ADDRS    1.0.0.1,1.1.1.1
 ENV ARGS=
 
 COPY . /tmp/repo
@@ -53,5 +53,6 @@ CMD exec ss-server \
       -m $METHOD \
       -t $TIMEOUT \
       -d $DNS_ADDRS \
+      --fast-open \
       -u \
       $ARGS
